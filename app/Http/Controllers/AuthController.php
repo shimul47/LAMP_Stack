@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\Mailer\Transport\Dsn;
 
 class AuthController extends Controller{
 
@@ -23,7 +24,8 @@ class AuthController extends Controller{
         $valid['password'] = Hash::make($valid['password']);
         $user = User::create($valid);
         Auth::login($user);
-
+         
+        //Previous Sign Up
         // Signup::create([
         //     'email' => $request->email,
         //     'username' => $request->username,
