@@ -41,7 +41,7 @@
 
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table class="table table-hover align-middle mb-0 serverview">
                     <thead class="table-light">
                         <tr class="text-center">
                             <th class="border">Image</th>
@@ -70,7 +70,10 @@
                                 @if(Auth::user()->name === "Admin")
                                     <td class="border">
                                         {{-- Toggle --}}
-                                        <button type="button" class="btn btn-sm" onclick="toggleStatus({{ $product->id }}, this)">
+                                        <button type="button"   class="btn btn-sm"
+                                        onclick="if (confirm('Are you sure?')){ 
+                                            toggleStatus({{ $product->id }}, this); 
+                                        }">
                                             @if($product->status === 'active')
                                                 <i class="fa-solid fa-toggle-on text-success"></i>
                                             @else

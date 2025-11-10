@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ResetTokenController;
 use App\Http\Controllers\ProductController;
@@ -40,3 +41,4 @@ Route::controller(EmployeeController::class)->middleware('auth')->group(function
 
 Route::middleware("auth")->resource('products', ProductController::class);
 
+Route::get('/data',[DataController::class,"view"])->middleware("auth")->name('data');

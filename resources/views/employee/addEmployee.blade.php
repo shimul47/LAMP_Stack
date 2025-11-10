@@ -25,7 +25,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label fs-5">Phone</label>
-                <input type="text" class="form-control" name="phone" required>
+                <input type="number" class="form-control" name="phone" required>
             </div>
             <div class="mb-3">
                 <label class="form-label fs-5">Image</label>
