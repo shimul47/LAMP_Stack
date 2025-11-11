@@ -110,7 +110,6 @@
     <div class="mt-4 justify-content-center">
         {{ $products->links('pagination::bootstrap-5') }}
     </div>
-    
 </div>
 
 {{-- edit Popup --}}
@@ -156,7 +155,6 @@
             <button class="btn btn-secondary btn-sm px-4" data-bs-dismiss="modal">Close</button>
             <button class="btn btn-success btn-sm px-4" onclick="saveEdit()">Save</button>
         </div>
-
     </div>
   </div>
 </div>
@@ -206,12 +204,12 @@ function saveEdit() {
     let id = document.getElementById("edit_id").value;
     let form = document.getElementById("editForm");
     let formData = new FormData(form);
-    formData.append('_method', 'PUT'); 
+    formData.append("_token", "{{ csrf_token() }}");
+    formData.append("_method","PUT");
 
     $.ajax({
         url: `/products/${id}`,
         type: "POST",
-        headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" },
         data: formData,
         processData: false,
         contentType: false,

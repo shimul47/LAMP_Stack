@@ -2,6 +2,9 @@ config/app.php
 During local development, you should set the APP_DEBUG environment variable to true.
 In your production environment, this value should always be false.
 
+If you are working with less than 10,000 rows use client-side processing, 
+for greater than 100,000 rows use server-side processing. 
+
 {{--  --}}
 use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;

@@ -6,6 +6,7 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ResetTokenController;
 use App\Http\Controllers\ProductController;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 Route::view('/',"home")->name("home");
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
@@ -41,4 +42,8 @@ Route::controller(EmployeeController::class)->middleware('auth')->group(function
 
 Route::middleware("auth")->resource('products', ProductController::class);
 
-Route::get('/data',[DataController::class,"view"])->middleware("auth")->name('data');
+Route::controller(DataController::class)->middleware("auth")->group(function(){
+    Route::get("/data","view")->name("data");
+    Route::put("/update","update")->name("update");
+    Route::post("delete","delete")->name("delete");
+});
