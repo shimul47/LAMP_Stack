@@ -36,7 +36,6 @@
 
             <label for="edit_name" class="form-label fw-semibold">Name</label><br>
             <input type="text" class="form-control" id="name" name="name">
-            @error('name') <p class="text-danger small">{{ $message }}</p> @enderror
         </form>
 
 
@@ -70,13 +69,13 @@
 
     function openEditModal(id,name){
         // console.log($("#edit_id").val(id));
-        // console.log($("#name").val(name));
         $("#edit_id").val(id);
         $("#name").val(name);
         $("#edit").modal('show');
     }
 
     function softDelete(id,name,email,created_at){ 
+        // console.log(name);
         $.ajax({
             url:`{{route("data_delete")}}`,
             type:"POST",
@@ -85,8 +84,8 @@
                 $(".data").DataTable().ajax.reload();
             },
             error: function(err){
-                console.error(err);
-                // alert("Something went wrong");
+                // console.error(err);
+                alert("Something went wrong");
             }
         })
     }
@@ -95,7 +94,6 @@
         // let id = document.getElementById("edit_id").value;
         // let name = document.getElementById("name").value;
         let formData = new FormData(document.getElementById("userForm"));
-
         formData.append("_method","PUT");
         $.ajax({
             url: `{{ route('update') }}`,
@@ -108,7 +106,7 @@
                 $(".data").DataTable().ajax.reload();
             },
             error:function(err){
-                alert(err,"Something went wrong.")
+                alert("Something went wrong.")
             }
         })
     }

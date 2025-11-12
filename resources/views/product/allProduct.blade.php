@@ -214,14 +214,7 @@ function saveEdit() {
         contentType: false,
     
         success: function(res) {
-            if (!res.success) {
-                alert("Update failed!");
-                return;
-            }
-
-            let modal = bootstrap.Modal.getInstance(document.getElementById("edit"));
-            modal.hide();
-
+            $("#edit").modal("hide")
             $("#name_" + id).text(res.data.product_name);
             $("#price_" + id).text(res.data.price + "৳");
             $("#img_" + id).attr("src", res.data.image ? "/storage/" + res.data.image : "/storage/products/default.jpg");
