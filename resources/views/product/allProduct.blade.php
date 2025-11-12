@@ -171,7 +171,7 @@ function toggleStatus(id, btn) {
     $.ajax({
         url: `/products/${id}`,
         type: "PUT",
-        data: { _token: "{{ csrf_token() }}", toggle_status: true },
+        data: {  toggle_status: true },
         success: function(res) {
             let icon = $(btn).find("i");
             let badge = $(btn).closest("tr").find("td:eq(3) span");
@@ -204,7 +204,6 @@ function saveEdit() {
     let id = document.getElementById("edit_id").value;
     let form = document.getElementById("editForm");
     let formData = new FormData(form);
-    formData.append("_token", "{{ csrf_token() }}");
     formData.append("_method","PUT");
 
     $.ajax({

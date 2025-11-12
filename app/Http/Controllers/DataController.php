@@ -17,7 +17,7 @@ class DataController extends Controller
             ->addColumn("operation",function($user){
                 return '
                     <button type="button" class="btn btn-sm" onclick="openEditModal('.$user->id.', \''.($user->name).'\')"> <i class="fa-regular fa-pen-to-square"></i></button>
-                    
+                    <button type="button" class="btn btn-sm" onclick="softDelete(' .$user->id.', \'' . $user->name . '\', \'' . $user->email . '\', \'' . $user->created_at . '\')"><i class="fa-solid fa-trash"></i></button>
                 ';
             })
             ->rawColumns(['operation'])//read html format
@@ -38,8 +38,17 @@ class DataController extends Controller
         return response()->json();
     }
 
-    public function store_delete(){
-        //
+    public function store_delete(Request $request){
+        SoftDelete::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "joined_at" => $request->created_at,
+            "deleted_at" => now(),
+        ]);
+        User::findOrFail($request->id)->delete();
+        return response()->json();
     }
 
 }
+// $contr = new DataController();
+// $contr->store_delete();

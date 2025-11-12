@@ -45,5 +45,5 @@ Route::middleware("auth")->resource('products', ProductController::class);
 Route::controller(DataController::class)->middleware("auth")->group(function(){
     Route::get("/data","view")->name("data");
     Route::put("/update","update")->name("update");
-    Route::post("delete","delete")->name("delete");
+    Route::post("/data-delete","store_delete")->name("data_delete");
 });

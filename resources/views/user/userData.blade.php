@@ -76,11 +76,26 @@
         $("#edit").modal('show');
     }
 
+    function softDelete(id,name,email,created_at){ 
+        $.ajax({
+            url:`{{route("data_delete")}}`,
+            type:"POST",
+            data:{ id: id, name: name, email: email, created_at: created_at },
+            success:function(res){
+                $(".data").DataTable().ajax.reload();
+            },
+            error: function(err){
+                console.error(err);
+                // alert("Something went wrong");
+            }
+        })
+    }
+
     function saveEdit(){
         // let id = document.getElementById("edit_id").value;
         // let name = document.getElementById("name").value;
         let formData = new FormData(document.getElementById("userForm"));
-        formData.append("_token", "{{ csrf_token() }}");
+
         formData.append("_method","PUT");
         $.ajax({
             url: `{{ route('update') }}`,
@@ -91,6 +106,9 @@
             success:function(res){
                 $("#edit").modal("hide")
                 $(".data").DataTable().ajax.reload();
+            },
+            error:function(err){
+                alert(err,"Something went wrong.")
             }
         })
     }
